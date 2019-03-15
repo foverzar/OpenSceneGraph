@@ -171,7 +171,7 @@ class OSG_EXPORT CullingSet : public Referenced
 #ifdef COMPILE_WITH_SHADOW_OCCLUSION_CULLING
         void addOccluder(ShadowVolumeOccluder& cv) { _occluderList.push_back(cv); }
 #else
-        void addOccluder(ShadowVolumeOccluder& cv) {}
+        void addOccluder(ShadowVolumeOccluder& /*cv*/) {}
 #endif
         void setPixelSizeVector(const Vec4& v) { _pixelSizeVector = v; }
 
