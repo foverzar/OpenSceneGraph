@@ -29,6 +29,17 @@
 
 using namespace osg;
 
+#ifdef __SWITCH__
+
+extern "C" void* SDL_GL_GetProcAddress(const char *procName);
+
+void* GLStaticLibrary::getProcAddress(const char* procName)
+{
+    return SDL_GL_GetProcAddress(procName);
+}
+
+#else
+
 namespace {
 typedef void (*GLProc)(void);
 typedef std::map<std::string, GLProc> GLProcAddressMap;
@@ -206,5 +217,7 @@ void* GLStaticLibrary::getProcAddress(const char* procName)
     GLProcAddressMap::const_iterator iter = sProcAddressMap.find(procName);
     return iter != sProcAddressMap.end() ? reinterpret_cast<void*>(iter->second) : 0;
 }
+
+#endif  // __SWITCH__
 
 #endif  // OSG_GLES2_LIBRARY_STATIC

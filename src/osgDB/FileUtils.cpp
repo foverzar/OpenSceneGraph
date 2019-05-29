@@ -81,7 +81,7 @@ typedef char TCHAR;
         #define stat64 stat
     #endif
 #elif defined(__CYGWIN__) || defined(__FreeBSD__) || defined(__DragonFly__) || \
-      (defined(__hpux) && !defined(_LARGEFILE64_SOURCE))
+      (defined(__hpux) && !defined(_LARGEFILE64_SOURCE)) || defined(__SWITCH__)
     #define stat64 stat
 #endif
 
