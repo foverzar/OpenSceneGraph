@@ -81,7 +81,7 @@ IF(WIN32 AND NOT ANDROID)
         PixelBufferWin32.cpp
     )
 ELSE()
-    IF(ANDROID)
+    IF(ANDROID OR SWITCH_LIBNX)
       SET(OSG_WINDOWING_SYSTEM "None" CACHE STRING "None Windowing system type for graphics window creation.")
     ELSE()
       SET(OSG_WINDOWING_SYSTEM "X11" CACHE STRING "Windowing system type for graphics window creation. options only X11")
