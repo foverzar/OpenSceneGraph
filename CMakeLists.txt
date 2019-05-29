@@ -49,7 +49,7 @@ ENDIF()
 # Additionally, OSG_WINDOWING_SYSTEM is set here for OSX since its
 # value is needed to find the correct version of OpenGL (X11 or Cocoa).
 
-IF(ANDROID)
+IF(ANDROID OR SWITCH_LIBNX)
     SET(OSG_WINDOWING_SYSTEM "None" CACHE STRING "Windowing system type for graphics window creation; options: None.")
 ELSEIF(WIN32)
     SET(OSG_WINDOWING_SYSTEM "Win32" CACHE STRING "Windowing system type for graphics window creation; options: Win32 or None.")
