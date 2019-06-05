@@ -989,6 +989,8 @@ int OpenThreads::GetNumberOfProcessors()
    if (ret == -1)
       return 0;
    return ret;
+#elif defined(__SWITCH__)
+   return 4;
 #elif defined(__sun__)
    long ret = sysconf(_SC_NPROCESSORS_ONLN);
    if (ret == -1)
