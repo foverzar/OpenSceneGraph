@@ -52,7 +52,7 @@
 #elif defined(__EMSCRIPTEN__)
     // Emscripten ships EGL, which we use to get OpenGL function addresses.
     #include <EGL/egl.h>
-#else
+#elif !defined(__SWITCH__)
     #include <dlfcn.h>
 #endif
 
