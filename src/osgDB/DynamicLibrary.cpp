@@ -32,7 +32,7 @@
 // to shl_load()/shl_unload()/shl_findsym()
 #include <dl.h>
 #include <errno.h>
-#else
+#elif !defined(__SWITCH__)
 #include <dlfcn.h>
 #endif
 #endif
@@ -66,7 +66,7 @@ DynamicLibrary::~DynamicLibrary()
 #elif defined(__hpux)
         // fortunately, shl_t is a pointer
         shl_unload (static_cast<shl_t>(_handle));
-#else // other unix
+#elif !defined(__SWITCH__) // other unix
         dlclose(_handle);
 #endif
     }
@@ -111,7 +111,7 @@ DynamicLibrary::HANDLE DynamicLibrary::getLibraryHandle( const std::string& libr
     // BIND_FIRST is necessary for some reason
     handle = shl_load ( libraryName.c_str(), BIND_DEFERRED|BIND_FIRST|BIND_VERBOSE, 0);
     return handle;
-#else // other unix
+#elif !defined(__SWITCH__) // other unix
 
     // dlopen will not work with files in the current directory unless
     // they are prefaced with './'  (DB - Nov 5, 2003).
@@ -162,7 +162,7 @@ DynamicLibrary::PROC_ADDRESS DynamicLibrary::getProcAddress(const std::string& p
         OSG_WARN << "DynamicLibrary::error " << strerror(errno) << std::endl;
         return NULL;
     }
-#else // other unix
+#elif !defined(__SWITCH__) // other unix
     void* sym = dlsym( _handle,  procName.c_str() );
     if (!sym) {
         OSG_WARN << "DynamicLibrary::failed looking up " << procName << std::endl;
